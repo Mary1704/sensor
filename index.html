@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arduino Sensor Data</title>
+</head>
+<body>
+  <h1>Arduino Sensor Data</h1>
+  <div id="sensor-data">
+    Distance: <span id="distance">Waiting for data...</span> cm
+  </div>
+
+  <script>
+    function updateSensorData(data) {
+      document.getElementById('distance').textContent = data.distance + ' cm';
+    }
+
+    function fetchData() {
+      // Faz uma solicitação GET para um endpoint no seu servidor que retorna os dados
+      // Substitua a URL abaixo com o endpoint real do seu servidor
+      fetch('/seu_endpoint_do_servidor')
+        .then(response => response.json())
+        .then(data => updateSensorData(data))
+        .catch(error => console.error('Erro ao buscar dados: ' + error));
+    }
+
+    // Atualize os dados periodicamente
+    setInterval(fetchData, 5000); // Atualiza a cada 5 segundos
+  </script>
+</body>
+</html>
